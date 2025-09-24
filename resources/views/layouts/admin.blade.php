@@ -127,6 +127,30 @@
               </li>
             </ul>
           </li>
+          <!-- Logout -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Cerrar sesión
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('logout') }}"
+                  class="nav-link text-danger"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>Cerrar sesión</p>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>

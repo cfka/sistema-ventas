@@ -8,28 +8,37 @@ use App\Http\Controllers\Sistema\Producto\ProveedorController;
 use App\Http\Controllers\Sistema\Usuario\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Forzar que la raiz del proyecto redirija a login, nada de register ni forgot-password
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
+// Forzar que /register redirija a login
+Route::get('/register', function () {
+    return redirect()->route('login');
+})->name('register');
+// Forzar que /forgot-password redirija a login
+Route::get('/forgot-password', function () {
+    return redirect()->route('login');
+})->name('forgot-password');
+
+
 
 // Solo una vez esta ruta:
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+    ])->group(function () {
 
+        /*---------------------------------------------------------------------------*/
+        /* Dashboard                                                                 */
+        /*---------------------------------------------------------------------------*/
+        Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
-Route::middleware([
-        'auth:sanctum',
-        config('jetstream.auth_session'),
-        'verified',
-    ])
-    ->group(function () {
         /*---------------------------------------------------------------------------*/
         /*               Rutas de Categorias                						 */
         /*---------------------------------------------------------------------------*/
